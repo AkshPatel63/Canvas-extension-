@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Canvas AutoSubmit",
+    "version": "1.0",
+    "description": "Auto-submits Canvas assignments if file is uploaded",
+    "permissions": ["storage", "scripting", "activeTab","notifications"],
+    "host_permissions": [
+      "https://*.instructure.com/*"
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    },
+
+    "icons": {
+      "48": "icons/icon48.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://*.instructure.com/courses/*/assignments/*"],
+        "js": ["content.js"]
+      }
+    ]
+  }
+  

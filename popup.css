@@ -1,0 +1,103 @@
+/* Base */
+body {
+    margin: 0;
+    padding: 12px;
+    width: 300px;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #2b2b2b;
+    color: #f0f0f0;
+  }
+  
+  /* Header */
+  .header h1 {
+    margin: 0 0 12px;
+    font-size: 1.25rem;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .card {
+    background: #3a3a3a;
+    padding: 8px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+  
+  /* Make one card span both columns */
+  .full‑width {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Toggle Switch */
+  .switch {
+    position: relative;
+    width: 36px;
+    height: 18px;
+  }
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #666;
+    transition: 0.3s;
+    border-radius: 18px;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 14px; width: 14px;
+    left: 2px; bottom: 2px;
+    background-color: #fff;
+    transition: 0.3s;
+    border-radius: 50%;
+  }
+  input:checked + .slider {
+    background-color: #4caf50;
+  }
+  input:checked + .slider:before {
+    transform: translateX(18px);
+  }
+  
+  /* Number Input */
+  input[type="number"] {
+    width: 60px;
+    padding: 4px;
+    border: none;
+    border-radius: 4px;
+    text-align: right;
+  }
+  
+  /* Save Button */
+  .save-btn {
+    width: 100%;
+    padding: 8px 0;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .save-btn:hover {
+    background-color: #45a049;
+  }
+  
