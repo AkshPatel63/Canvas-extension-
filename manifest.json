@@ -1,18 +1,29 @@
 {
     "manifest_version": 3,
-    "name": "Canvas AutoSubmit",
+    "name": "Canvas Auto‑Submit",
     "version": "1.0",
-    "description": "Auto-submits Canvas assignments if file is uploaded",
-    "permissions": ["storage", "scripting", "activeTab","notifications"],
+    "description": "Auto‑submits Canvas assignments before the due date.",
+    "permissions": [
+      "storage",
+      "scripting",
+      "activeTab",
+      "notifications",
+      "alarms"
+    ],
     "host_permissions": [
       "https://*.instructure.com/*"
     ],
     "action": {
-      "default_popup": "popup.html"
+      "default_popup": "popup.html",
+      "default_icon": {
+        "48": "icons/icon48.png"
+      }
     },
-
     "icons": {
       "48": "icons/icon48.png"
+    },
+    "background": {
+      "service_worker": "background.js"
     },
     "content_scripts": [
       {
@@ -21,4 +32,3 @@
       }
     ]
   }
-  

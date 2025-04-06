@@ -1,4 +1,7 @@
+// popup.js
+
 document.addEventListener('DOMContentLoaded', () => {
+    const tokenInput   = document.getElementById('tokenInput');
     const autoToggle   = document.getElementById('autoSubmitToggle');
     const notifyToggle = document.getElementById('notifyToggle');
     const leadValue    = document.getElementById('leadValue');
@@ -7,12 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
     // Load saved settings (or defaults)
     chrome.storage.sync.get(
-      { autoSubmit: true, notify: true, submitTime: 5 },
-      ({ autoSubmit, notify, submitTime }) => {
-        autoToggle.checked   = autoSubmit;
+      { canvasToken: '', autoSubmit: true, notify: true, submitTime: 5 },
+      ({ canvasToken, autoSubmit, notify, submitTime }) => {
+        tokenInput.value   = canvasToken;  // <-- user’s personal access token
+        autoToggle.checked = autoSubmit;
         notifyToggle.checked = notify;
   
-        // convert stored submitTime (in minutes) back into value+unit
+        // convert stored submitTime back into value+unit
         if (submitTime % 60 === 0) {
           leadValue.value = submitTime / 60;
           leadUnit.value  = 'hours';
@@ -23,24 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     );
   
-    // Save settings when user clicks “Save”
     saveBtn.addEventListener('click', () => {
-      // read the value and unit, convert to minutes
+      // Read and normalize lead time
       let val = parseInt(leadValue.value, 10);
       if (isNaN(val) || val < 1) val = 5;
       const unit = leadUnit.value;
       const submitTime = unit === 'hours' ? val * 60 : val;
   
-      const settings = {
+      // Save all settings, including the personal access token
+      chrome.storage.sync.set({
+        canvasToken: tokenInput.value.trim(),  // <-- store token here
         autoSubmit: autoToggle.checked,
         notify:     notifyToggle.checked,
         submitTime
-      };
-  
-      chrome.storage.sync.set(settings, () => {
+      }, () => {
         saveBtn.textContent = 'Saved!';
         setTimeout(() => (saveBtn.textContent = 'Save'), 1200);
       });
     });
   });
-  
